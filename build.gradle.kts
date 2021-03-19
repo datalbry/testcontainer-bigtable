@@ -15,8 +15,9 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-configure<SigningExtension> {
-    sign(configurations.archives.get())
+java {
+    withJavadocJar()
+    withSourcesJar()
 }
 
 configure<PublishingExtension> {
@@ -70,6 +71,15 @@ configure<PublishingExtension> {
             }
         }
     }
+}
+
+configure<SigningExtension> {
+    sign(configurations.archives.get())
+}
+
+
+signing {
+    sign(publishing.publications["jar"])
 }
 
 dependencies {
